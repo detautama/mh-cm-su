@@ -8,15 +8,14 @@
 
     <meta name="description" content="<?php echo $this->template->description; ?>">
     <?php echo $this->template->meta; ?>
-<!--    <link rel="shortcut icon" type="image/png" href="--><?php //echo base_url(); ?><!--/public/images/logo.png"/>-->
 
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/public/css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/public/css/bootstrap.min.css">
     <link rel="stylesheet" type="text/css" href="<?php echo base_url();?>/public/css/font-awesome.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     <?php echo $this->template->stylesheet; ?>
 
     <script src="<?php echo base_url();?>/public/js/jquery-3.2.1.min.js"></script>
-    <script src="<?php echo base_url();?>/public/js/bootstrap.js"></script>
+    <script src="<?php echo base_url();?>/public/js/bootstrap.min.js"></script>
 
     <!-- or -->
     <?php echo $this->template->javascript; ?>

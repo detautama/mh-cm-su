@@ -327,7 +327,7 @@ $config['cache_query_string'] = FALSE;
 | https://codeigniter.com/user_guide/libraries/encryption.html
 |
 */
-$config['encryption_key'] = 'rumahmediaxkoepoekoepoe';
+$config['encryption_key'] = '123markethub456';
 /*
 |--------------------------------------------------------------------------
 | Session Variables

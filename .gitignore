@@ -1,5 +1,5 @@
 .DS_Store
-
+*.orig
 application/cache/*
 !application/cache/index.html
 

@@ -2,129 +2,131 @@
 <html>
 
 <head>
-  <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
-  <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
+    <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
+    <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
 </head>
 
 <body>
-  <div id="app">
+<div id="app">
     <v-app>
-      <v-navigation-drawer fixed v-model="drawer" app>
-        <v-list dense>
-          <v-list-tile>
-            <v-list-tile-title>
-              <h1>Markethub</h1>
-            </v-list-tile-title>
-          </v-list-tile>
-          <v-list-tile href="./home.html">
-            <v-list-tile-action>
-              <v-icon>home</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>Daftar Produk</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-          <v-list-tile @click="">
-            <v-list-tile-action>
-              <v-icon>contact_mail</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>Pengaturan</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </v-list>
-      </v-navigation-drawer>
-      <v-toolbar color="indigo" dark fixed app>
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-        <v-toolbar-title>Channel Manager</v-toolbar-title>
-      </v-toolbar>
-      <v-content>
-        <v-container style="position: relative">
-          <v-layout row wrap>
-            <v-flex xs12>
-              <v-container fluid grid-list-lg>
+        <v-navigation-drawer fixed v-model="drawer" app>
+            <v-list dense>
+                <v-list-tile>
+                    <v-list-tile-title>
+                        <h1>Markethub</h1>
+                    </v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile href="./home.html">
+                    <v-list-tile-action>
+                        <v-icon>home</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Daftar Produk</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile @click="">
+                    <v-list-tile-action>
+                        <v-icon>contact_mail</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Pengaturan</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+        <v-toolbar color="indigo" dark fixed app>
+            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-title>Channel Manager</v-toolbar-title>
+        </v-toolbar>
+        <v-content>
+            <v-container style="position: relative">
                 <v-layout row wrap>
-                  <v-flex class="m-2" xs6 md3 v-for="item in items">
-                    <v-card href="./detail.html">
-                      <v-card-media src="https://s2.bukalapak.com/img/2441134031/large/Mifi_Modem_Wifi_4G_XL_Go_Movimax_MV003_Free_60Gb_60Hari_BEST.jpg"
-                        height="200px">
-                      </v-card-media>
-                      <v-card-title primary-title>
-                        <div>
-                          Mifi XL Go
-                        </div>
-                      </v-card-title>
-                    </v-card>
-                  </v-flex>
-                  <v-btn href="./add.html" color="pink" dark fixed fab style="right:30px;bottom:50px">
-                    <v-icon>add</v-icon>
-                  </v-btn>
+                    <v-flex xs12>
+                        <v-container fluid grid-list-lg>
+                            <v-layout row wrap>
+                                <v-flex class="m-2" xs6 md3 v-for="item in items">
+                                    <v-card href="./detail.html">
+                                        <v-card-media
+                                                src="https://s2.bukalapak.com/img/2441134031/large/Mifi_Modem_Wifi_4G_XL_Go_Movimax_MV003_Free_60Gb_60Hari_BEST.jpg"
+                                                height="200px">
+                                        </v-card-media>
+                                        <v-card-title primary-title>
+                                            <div>
+                                                Mifi XL Go
+                                            </div>
+                                        </v-card-title>
+                                    </v-card>
+                                </v-flex>
+                                <v-btn href="./add.html" color="pink" dark fixed fab style="right:30px;bottom:50px">
+                                    <v-icon>add</v-icon>
+                                </v-btn>
+                            </v-layout>
+                        </v-container>
+                    </v-flex>
                 </v-layout>
-              </v-container>
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-content>
-      <v-footer color="indigo" app>
-        <span class="white--text">&copy; 2018</span>
-      </v-footer>
+            </v-container>
+        </v-content>
+        <v-footer color="indigo" app>
+            <span class="white--text">&copy; 2018</span>
+        </v-footer>
     </v-app>
-  </div>
+</div>
 
-  <script src="https://unpkg.com/vue/dist/vue.js"></script>
-  <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
-  <script>
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+<script>
     var app = new Vue({
-      el: '#app',
-      data: () => ({
-        drawer: null,
-        items: [{
-            message: 'Foo'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          },
-          {
-            message: 'Bar'
-          }
-        ]
-      }),
-      props: {
+            el: '#app',
+            data: () = > ({
+            drawer: null,
+            items: [{
+                message: 'Foo'
+            },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                },
+                {
+                    message: 'Bar'
+                }
+            ]
+        }),
+        props
+    :
+    {
         source: String
-      }
+    }
     })
-  </script>
+</script>
 </body>
-
 </html>

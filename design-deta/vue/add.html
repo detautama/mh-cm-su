@@ -8,109 +8,112 @@
 </head>
 
 <body>
-    <div id="app">
-        <v-app>
-            <v-navigation-drawer fixed v-model="drawer" app>
-                <v-list dense>
-                    <v-list-tile>
-                        <v-list-tile-title>
-                            <h1>Markethub</h1>
-                        </v-list-tile-title>
-                    </v-list-tile>
-                    <v-list-tile href="./home.html">
-                        <v-list-tile-action>
-                            <v-icon>home</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title>Daftar Produk</v-list-tile-title>
-                        </v-list-tile-content>
-                    </v-list-tile>
-                    <v-list-tile @click="">
-                        <v-list-tile-action>
-                            <v-icon>contact_mail</v-icon>
-                        </v-list-tile-action>
-                        <v-list-tile-content>
-                            <v-list-tile-title>Pengaturan</v-list-tile-title>
-                        </v-list-tile-content>
-                    </v-list-tile>
-                </v-list>
-            </v-navigation-drawer>
-            <v-toolbar color="indigo" dark fixed app>
-                <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
-                <v-toolbar-title>Channel Manager</v-toolbar-title>
-            </v-toolbar>
-            <v-content>
-                <v-container style="position: relative">
-                    <v-layout row wrap>
-                        <v-flex xs12 md6 offset-md3>
-                            <v-card>
-                                <v-card-title>
-                                    <h1>Tambah Produk</h1>
-                                </v-card-title>
-                                <v-card-text>
-                                    <v-form action="welcome_get.php" method="get">
-                                        <v-text-field name="nama_produk" label="Nama Produk" requried></v-text-field>
-                                        <v-text-field name="sku" label="SKU" requried></v-text-field>
-                                        <v-checkbox v-model="asuransi" label="Asuransi"></v-checkbox>
-                                        <input style="display:none;" type="checkbox" name="asuransi" :checked="asuransi">
-                                        <v-text-field name="minimum_order" label="Minimum Order" requried></v-text-field>
-                                        <v-text-field name="harga" label="Harga" requried></v-text-field>
-                                        <v-text-field name="berat" label="Berat (gram)" requried></v-text-field>
-                                        <v-text-field name="stok" label="Stok" requried></v-text-field>
-                                        <v-text-field name="deskripsi" label="Deskripsi" textarea requried></v-text-field>
-                                        <v-select :items="kategories1" v-model="ctg1" label="Kategori 1" single-line bottom></v-select>
-                                        <input style="display:none;" type="text" name="ctg1" :value="ctg1.text">
-                                        <v-btn block color="primary" type="submit">Tambah</v-btn>
-                                    </v-form>
-                                </v-card-text>
-                            </v-card>
-                        </v-flex>
-                    </v-layout>
-                </v-container>
-            </v-content>
-            <v-footer color="indigo" app>
-                <span class="white--text">&copy; 2018</span>
-            </v-footer>
-        </v-app>
-    </div>
+<div id="app">
+    <v-app>
+        <v-navigation-drawer fixed v-model="drawer" app>
+            <v-list dense>
+                <v-list-tile>
+                    <v-list-tile-title>
+                        <h1>Markethub</h1>
+                    </v-list-tile-title>
+                </v-list-tile>
+                <v-list-tile href="./home.html">
+                    <v-list-tile-action>
+                        <v-icon>home</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Daftar Produk</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+                <v-list-tile @click="">
+                    <v-list-tile-action>
+                        <v-icon>contact_mail</v-icon>
+                    </v-list-tile-action>
+                    <v-list-tile-content>
+                        <v-list-tile-title>Pengaturan</v-list-tile-title>
+                    </v-list-tile-content>
+                </v-list-tile>
+            </v-list>
+        </v-navigation-drawer>
+        <v-toolbar color="indigo" dark fixed app>
+            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-toolbar-title>Channel Manager</v-toolbar-title>
+        </v-toolbar>
+        <v-content>
+            <v-container style="position: relative">
+                <v-layout row wrap>
+                    <v-flex xs12 md6 offset-md3>
+                        <v-card>
+                            <v-card-title>
+                                <h1>Tambah Produk</h1>
+                            </v-card-title>
+                            <v-card-text>
+                                <v-form action="welcome_get.php" method="get">
+                                    <v-text-field name="nama_produk" label="Nama Produk" requried></v-text-field>
+                                    <v-text-field name="sku" label="SKU" requried></v-text-field>
+                                    <v-checkbox v-model="asuransi" label="Asuransi"></v-checkbox>
+                                    <input style="display:none;" type="checkbox" name="asuransi" :checked="asuransi">
+                                    <v-text-field name="minimum_order" label="Minimum Order" requried></v-text-field>
+                                    <v-text-field name="harga" label="Harga" requried></v-text-field>
+                                    <v-text-field name="berat" label="Berat (gram)" requried></v-text-field>
+                                    <v-text-field name="stok" label="Stok" requried></v-text-field>
+                                    <v-text-field name="deskripsi" label="Deskripsi" textarea requried></v-text-field>
+                                    <v-select :items="kategories1" v-model="ctg1" label="Kategori 1" single-line
+                                              bottom></v-select>
+                                    <input style="display:none;" type="text" name="ctg1" :value="ctg1.text">
+                                    <v-btn block color="primary" type="submit">Tambah</v-btn>
+                                </v-form>
+                            </v-card-text>
+                        </v-card>
+                    </v-flex>
+                </v-layout>
+            </v-container>
+        </v-content>
+        <v-footer color="indigo" app>
+            <span class="white--text">&copy; 2018</span>
+        </v-footer>
+    </v-app>
+</div>
 
-    <script src="https://unpkg.com/vue/dist/vue.js"></script>
-    <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
-    <script>
-        var app = new Vue({
+<script src="https://unpkg.com/vue/dist/vue.js"></script>
+<script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
+<script>
+    var app = new Vue({
             el: '#app',
-            data: () => ({
-                drawer: null,
-                asuransi: false,
-                ctg1: '',
-                kategories1: [{
-                        text: 'State 1'
-                    },
-                    {
-                        text: 'State 2'
-                    },
-                    {
-                        text: 'State 3'
-                    },
-                    {
-                        text: 'State 4'
-                    },
-                    {
-                        text: 'State 5'
-                    },
-                    {
-                        text: 'State 6'
-                    },
-                    {
-                        text: 'State 7'
-                    }
-                ]
-            }),
-            props: {
-                source: String
-            }
-        })
-    </script>
+            data: () = > ({
+            drawer: null,
+            asuransi: false,
+            ctg1: '',
+            kategories1: [{
+                text: 'State 1'
+            },
+                {
+                    text: 'State 2'
+                },
+                {
+                    text: 'State 3'
+                },
+                {
+                    text: 'State 4'
+                },
+                {
+                    text: 'State 5'
+                },
+                {
+                    text: 'State 6'
+                },
+                {
+                    text: 'State 7'
+                }
+            ]
+        }),
+        props
+    :
+    {
+        source: String
+    }
+    })
+</script>
 </body>
 
 </html>

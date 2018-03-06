@@ -17,14 +17,11 @@ class DataUser extends MY_Model {
 
         if ($row)
         {
-            if($this->encryption->decrypt($row->password)==$password)
+            if ($row->password == $password)
                 return $row;
             else
                 return false;
         } else
-        {
             return false;
-        }
     }
-
 }

@@ -5,7 +5,7 @@ class Main extends MX_Controller {
     public function __construct()
     {
         parent::__construct();
-        $this->load->model('main/user');
+        $this->load->model('main/DataUser');
         $this->form_validation->CI =& $this;
     }
 
@@ -13,27 +13,93 @@ class Main extends MX_Controller {
     {
         if ($this->session->logged_in)
         {
-            $this->template->content->view('dashboard');
-            $this->template->set_template('backoffice/template');
+            $this->template->set_template('frontend/template');
+            $this->template->title = 'MarketHub Channel Manager';
+            $this->template->stylesheet->add(base_url() . "public/css/index.css");
+
+            $this->template->content->view('main/marketplace-login');
             $this->template->publish();
         } else
         {
-            $this->template->set_template('frontend/template');
-            $this->template->title = 'MarketHub Channel Manager';
-            $this->template->stylesheet->add(base_url() . "public/css/floating-labels.css");
+            if ($this->isPost())
+            {
+                $this->login_submit();
+            } else
+            {
+                $this->template->set_template('frontend/template');
+                $this->template->title = 'MarketHub Channel Manager';
+                $this->template->stylesheet->add(base_url() . "public/css/floating-labels.css");
 
-            $this->template->content->view('main/login');
-            $this->template->publish();
+                $this->template->content->view('main/login');
+                $this->template->publish();
+            }
         }
     }
 
-    public function marketplace()
+    protected function login_submit()
     {
-        $this->template->set_template('frontend/template');
-        $this->template->title = 'MarketHub Channel Manager';
-        $this->template->stylesheet->add(base_url() . "public/css/index.css");
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == false)
+        {
+            $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
+            redirect(current_url() . "#errors");
+        } else
+        {
+            $username = $this->input->post('username');
+            $password = $this->input->post('password');
+            $result = $this->DataUser->login($username, $password);
+            if ($result)
+            {
+                $this->session->set_userdata('logged_in', $result);
+                redirect(base_url());
+            } else
+            {
+                $this->session->set_flashdata('error', '<p class="alert alert-danger">Invalid username and password</p>');
+                redirect(current_url() . "#errors");
+            }
+        }
+    }
 
-        $this->template->content->view('main/marketplace-login');
-        $this->template->publish();
+    public function tokopedia_submit()
+    {
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == false)
+        {
+            $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
+            redirect(current_url() . "#errors");
+        } else
+        {
+
+        }
+    }
+
+    public function elevenia_submit()
+    {
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == false)
+        {
+            $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
+            redirect(current_url() . "#errors");
+        } else
+        {
+
+        }
+    }
+
+    public function bukalapak_submit()
+    {
+        $this->form_validation->set_rules('username', 'Username', 'required');
+        $this->form_validation->set_rules('password', 'Password', 'required');
+        if ($this->form_validation->run() == false)
+        {
+            $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
+            redirect(current_url() . "#errors");
+        } else
+        {
+
+        }
     }
 }

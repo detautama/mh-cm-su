@@ -7,7 +7,6 @@ class Main extends MX_Controller {
         parent::__construct();
         $this->load->model('main/DataUser');
         $this->form_validation->CI =& $this;
-
     }
 
     public function index()
@@ -55,5 +54,11 @@ class Main extends MX_Controller {
                 redirect(current_url() . "#errors");
             }
         }
+    }
+
+    public function logout()
+    {
+        $this->session->unset_userdata('logged_in');
+        redirect(base_url());
     }
 }

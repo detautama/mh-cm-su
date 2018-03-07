@@ -4,13 +4,14 @@
         <h2 class="text-center">Login Marketplace</h2>
         <div class="row text-center">
             <div class="col-md-4">
-                <div class="w3-card pb-1">
+                <div class="w3-card pb-2">
                     <img class="img-responsive img-circle"
                          src="<?php echo base_url() ?>/public/images/tokopedia.png">
                     <?php if ($this->session->tokopedia_account)
                     { ?>
                         <div class="alert alert-success ml-4 mr-4" role="alert">Submitted
                         </div>
+                        <a href="<?php echo base_url() ?>marketplace/signout/tokopedia_account/1"><button class="btn btn-lg btn-danger">Sign Out</button></a>
                         <?php
                     } else
                     { ?>
@@ -33,12 +34,13 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="w3-card pb-1">
+                <div class="w3-card pb-2">
                     <img class="img-responsive img-circle" src="<?php echo base_url() ?>/public/images/bukalapak.png">
                     <?php if ($this->session->bukalapak_account)
                     { ?>
                         <div class="alert alert-success ml-4 mr-4" role="alert">Submitted
                         </div>
+                        <a href="<?php echo base_url() ?>marketplace/signout/bukalapak_account/3"><button class="btn btn-lg btn-danger">Sign Out</button></a>
                         <?php
                     } else
                     { ?>
@@ -61,12 +63,13 @@
                 </div>
             </div>
             <div class="col-md-4">
-                <div class="w3-card pb-1">
+                <div class="w3-card pb-2">
                     <img class="img-responsive img-circle" src="<?php echo base_url() ?>/public/images/elevenia.png">
                     <?php if ($this->session->elevenia_account)
                     { ?>
                         <div class="alert alert-success ml-4 mr-4" role="alert">Submitted
                         </div>
+                        <a href="<?php echo base_url() ?>marketplace/signout/elevenia_account/2"><button class="btn btn-lg btn-danger">Sign Out</button></a>
                         <?php
                     } else
                     { ?>

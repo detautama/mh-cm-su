@@ -82,4 +82,15 @@ class Marketplace extends MX_Controller {
         $this->session->set_userdata($session, $accountData);
         redirect(base_url() . '/marketplace');
     }
+
+    public function signOut($sessionName, $marketplaceId)
+    {
+        $accountData = array(
+            'cm_username' => $this->session->userdata('logged_in')->username,
+            'marketplace' => $marketplaceId
+        );
+        $this->DataMarketplaceAccount->deleteData('marketplace_accounts', $accountData);
+        $this->session->unset_userdata($sessionName);
+        redirect(base_url() . '/marketplace');
+    }
 }

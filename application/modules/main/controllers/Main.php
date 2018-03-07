@@ -7,18 +7,14 @@ class Main extends MX_Controller {
         parent::__construct();
         $this->load->model('main/DataUser');
         $this->form_validation->CI =& $this;
+
     }
 
     public function index()
     {
         if ($this->session->logged_in)
         {
-            $this->template->set_template('frontend/template');
-            $this->template->title = 'MarketHub Channel Manager';
-            $this->template->stylesheet->add(base_url() . "public/css/index.css");
-
-            $this->template->content->view('main/marketplace-login');
-            $this->template->publish();
+            redirect(base_url().'marketplace');
         } else
         {
             if ($this->isPost())
@@ -58,48 +54,6 @@ class Main extends MX_Controller {
                 $this->session->set_flashdata('error', '<p class="alert alert-danger">Invalid username and password</p>');
                 redirect(current_url() . "#errors");
             }
-        }
-    }
-
-    public function tokopedia_submit()
-    {
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        if ($this->form_validation->run() == false)
-        {
-            $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
-            redirect(current_url() . "#errors");
-        } else
-        {
-
-        }
-    }
-
-    public function elevenia_submit()
-    {
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        if ($this->form_validation->run() == false)
-        {
-            $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
-            redirect(current_url() . "#errors");
-        } else
-        {
-
-        }
-    }
-
-    public function bukalapak_submit()
-    {
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        if ($this->form_validation->run() == false)
-        {
-            $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
-            redirect(current_url() . "#errors");
-        } else
-        {
-
         }
     }
 }

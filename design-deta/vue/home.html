@@ -78,7 +78,7 @@
 <script>
     var app = new Vue({
             el: '#app',
-            data: () = > ({
+            data: {
             drawer: null,
             items: [{
                 message: 'Foo'
@@ -120,12 +120,7 @@
                     message: 'Bar'
                 }
             ]
-        }),
-        props
-    :
-    {
-        source: String
-    }
+        }
     })
 </script>
 </body>

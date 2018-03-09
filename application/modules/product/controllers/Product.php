@@ -17,11 +17,37 @@ class Product extends MX_Controller {
 
     public function index()
     {
-        $this->load->view('product/home');
+        $this->template->set_template('frontend-vue/template');
+        $this->template->title = 'MarketHub Channel Manager';
+
+        $this->template->header->view('frontend-vue/partials/navigation-header');
+        $this->template->content->view('product/vue/home');
+        $this->template->footer->view('frontend-vue/partials/footer');
+        $this->template->vuescript->view('product/vue/script/home.js');
+        $this->template->publish();
     }
 
     public function add()
     {
-        $this->load->view('product/vue/add');
+        $this->template->set_template('frontend-vue/template');
+        $this->template->title = 'MarketHub Channel Manager';
+
+        $this->template->header->view('frontend-vue/partials/navigation-header');
+        $this->template->content->view('product/vue/add');
+        $this->template->footer->view('frontend-vue/partials/footer');
+        $this->template->vuescript->view('product/vue/script/add.js');
+        $this->template->publish();
+    }
+
+    public function detail()
+    {
+        $this->template->set_template('frontend-vue/template');
+        $this->template->title = 'MarketHub Channel Manager';
+
+        $this->template->header->view('frontend-vue/partials/navigation-header');
+        $this->template->content->view('product/vue/detail');
+        $this->template->footer->view('frontend-vue/partials/footer');
+        $this->template->vuescript->view('product/vue/script/detail.js');
+        $this->template->publish();
     }
 }

@@ -4,61 +4,42 @@ class Main extends MX_Controller {
 
     public function __construct()
     {
+        header('Access-Control-Allow-Headers: *');
+        header('Access-Control-Allow-Origin: *');
         parent::__construct();
         $this->load->model('main/DataUser');
         $this->form_validation->CI =& $this;
     }
 
-    public function index()
+    public function login()
     {
-        if ($this->session->logged_in)
+        $token = null;
+        $headers = apache_request_headers();
+        if (isset($headers['Authorization']))
         {
-            redirect(base_url().'marketplace');
+            $matches = array();
+            preg_match('/Token token="(.*)"/', $headers['Authorization'], $matches);
+            if (isset($matches[1]))
+            {
+                $token = $matches[1];
+            }
+        }
+
+        $token = str_replace("Basic ", "", $headers['Authorization']);
+        $user = $this->DataUser->login('users', $token);
+        if ($user)
+        {
+            $data = array('token' => $token, 'username' => $user->username);
+            echo json_encode($data);
         } else
         {
-            if ($this->isPost())
-            {
-                $this->login_submit();
-            } else
-            {
-                $this->template->set_template('frontend/template');
-                $this->template->title = 'MarketHub Channel Manager';
-                $this->template->stylesheet->add(base_url() . "public/css/floating-labels.css");
-
-                $this->template->content->view('main/login');
-                $this->template->publish();
-            }
+            $data = array('message' => "user tidak ditemukan");
+            echo json_encode($data);
         }
     }
 
-    protected function login_submit()
+    public function encode()
     {
-        $this->form_validation->set_rules('username', 'Username', 'required');
-        $this->form_validation->set_rules('password', 'Password', 'required');
-        if ($this->form_validation->run() == false)
-        {
-            $this->session->set_flashdata('error', validation_errors('<p class="alert alert-danger">', '</p>'));
-            redirect(current_url() . "#errors");
-        } else
-        {
-            $username = $this->input->post('username');
-            $password = $this->input->post('password');
-            $result = $this->DataUser->login($username, $password);
-            if ($result)
-            {
-                $this->session->set_userdata('logged_in', $result);
-                redirect(base_url());
-            } else
-            {
-                $this->session->set_flashdata('error', '<p class="alert alert-danger">Invalid username and password</p>');
-                redirect(current_url() . "#errors");
-            }
-        }
-    }
-
-    public function logout()
-    {
-        $this->session->unset_userdata('logged_in');
-        redirect(base_url());
+        echo base64_encode('deta:deta');
     }
 }

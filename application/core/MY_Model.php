@@ -28,7 +28,7 @@ class MY_Model extends CI_Model {
         $this->db->delete($table, $where);
     }
 
-    public function updateData($data, $where, $table)
+    public function updateData($table,$data,$where)
     {
         $this->db->set($data);
         $this->db->where($where);
@@ -167,15 +167,5 @@ class MY_Model extends CI_Model {
         else{
             return false;
         }
-
-    }
-
-    public function incrementLikeCount($table, $where)
-    {
-        $count = $this->getSpecificData($table,$where);
-        $count->LIKE_COUNT++;
-        $this->db->set('LIKE_COUNT', $count->LIKE_COUNT);
-        $this->db->where($where);
-        $this->db->update($table);
     }
 }

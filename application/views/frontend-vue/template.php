@@ -5,12 +5,16 @@
     <title><?php echo $this->template->title->default("MarketHub"); ?></title>
     <link href='https://fonts.googleapis.com/css?family=Roboto:300,400,500,700|Material+Icons' rel="stylesheet">
     <link href="https://unpkg.com/vuetify/dist/vuetify.min.css" rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="<?php echo base_url(); ?>/public/css/dropzone.css">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, minimal-ui">
     <?php echo $this->template->meta; ?>
 
     <?php echo $this->template->stylesheet; ?>
 
     <?php echo $this->template->javascript; ?>
+
+    <script src="<?php echo base_url();?>/public/js/jquery-3.2.1.min.js"></script>
+    <script src="<?php echo base_url(); ?>/public/js/dropzone.js"></script>
     <script src="https://unpkg.com/vue/dist/vue.js"></script>
     <script src="https://unpkg.com/vuetify/dist/vuetify.js"></script>
 </head>
@@ -35,5 +39,6 @@
 echo $this->template->vuescript;
 ?>
 </script>
+
 </body>
 </html>

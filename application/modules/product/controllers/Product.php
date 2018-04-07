@@ -15,6 +15,8 @@ class Product extends MX_Controller {
         parent::__construct();
         $this->load->model('product/DataProduct');
         $this->load->model('product/DataUser');
+        $this->load->model('product/DataRecord');
+
     }
 
     public function tambah()
@@ -37,7 +39,16 @@ class Product extends MX_Controller {
                     'deskripsi'     => $this->input->post('deskripsi'),
                     'ctgi'          => $this->input->post('ctgi')
                 );
-                $this->DataProduct->addData('produk', $data);
+                $data = $this->DataProduct->addAndGet('produk', $data, 'id_produk');
+                $this->upload($data['id_produk']);
+                $this->DataRecord->addData('records', array(
+                    'token'=>$token,
+                    'id_produk'=>$data['id_produk'],
+                    'activity'=>"menambah"
+                ));
+                $data['image_url'] = $this->DataProduct->searchData(null, null, 'produk_image', null, null, array(
+                    'id_produk' => $data['id_produk']
+                ));
                 echo json_encode($data);
             } else
             {
@@ -52,10 +63,12 @@ class Product extends MX_Controller {
         if ($this->isPost())
         {
             $token = $this->getToken();
-            if ($token)
+            $user_mp = $this->DataUser->login('users', $token);
+            if ($user_mp)
             {
                 $data = array(
                     'nama_produk'   => $this->input->post('nama_produk'),
+                    'user_token'    => $token,
                     'sku'           => $this->input->post('sku'),
                     'asuransi'      => $this->input->post('asuransi'),
                     'minimum_order' => $this->input->post('minimum_order'),
@@ -65,8 +78,17 @@ class Product extends MX_Controller {
                     'deskripsi'     => $this->input->post('deskripsi'),
                     'ctgi'          => $this->input->post('ctgi')
                 );
-                $this->DataProduct->updateData('produk', $data,array('id_produk'=>$idproduk));
-                echo json_encode(array("message" => "produk updated"));
+                $data = $this->DataProduct->updateAndGetData('produk', $data, array('id_produk' => $idproduk), $idproduk);
+                $this->upload($data['id_produk']);
+                $data['image_url'] = $this->DataProduct->searchData(null, null, 'produk_image', null, null, array(
+                    'id_produk' => $data['id_produk']
+                ));
+                $this->DataRecord->addData('records', array(
+                    'token'=>$token,
+                    'id_produk'=>$data['id_produk'],
+                    'activity'=>"mengubah"
+                ));
+                echo json_encode($data);
             } else
             {
                 $data = array('message' => "user tidak ditemukan");
@@ -78,33 +100,46 @@ class Product extends MX_Controller {
     public function delete($produkId)
     {
         $token = $this->getToken();
-        if($token)
+        if ($token)
         {
             $this->DataProduct->deleteData('produk', array(
                 'user_token' => $token,
                 'id_produk'  => $produkId
             ));
+            $this->DataRecord->addData('records', array(
+                'token'=>$token,
+                'id_produk'=>$produkId,
+                'activity'=>"mengubah"
+            ));
             echo json_encode(array("message" => "produk deleted"));
-        }else{
+        } else
+        {
             $data = array('message' => "user tidak ditemukan");
             echo json_encode($data);
         }
-
     }
 
-    public function list()
+    public function deleteImage()
+    {
+        $this->DataProduct->deleteData('produk_image', array(
+            'id_produk'  => $this->input->post('id'),
+            'image_path' => $this->input->post('path')
+        ));
+        echo json_encode(array('message' => 'image deleted'));
+    }
+
+    public function lists()
     {
         $token = $this->getToken();
-        $arr = $this->DataProduct->searchData(0, 0, 'produk', null, null, array(
-            'user_token' => $token
-        ));
+        $arr = $this->DataProduct->getRelation2D(null, null, 'produk');
         //add the header here
-        header('Content-Type: application/json');
+        header('Access-Control-Allow-Headers: *');
+        header('Access-Control-Allow-Origin: *');
         if ($arr)
             echo json_encode($arr);
         else
         {
-            echo json_encode(array('message' => "user tidak ditemukan"));
+            echo json_encode(array());
         }
     }
 
@@ -121,5 +156,31 @@ class Product extends MX_Controller {
     {
         $base_64 = base64_encode('adminadmin');
         echo json_encode($base_64);
+    }
+
+    public function upload($produkId)
+    {
+        $data = [];
+        if (!empty($_FILES))
+        {
+            foreach ($_FILES['image']['tmp_name'] as $index => $tmpName)
+            {
+                if (!empty($tmpName) && is_uploaded_file($tmpName))
+                {
+                    $filename = time() . str_replace(' ', '', strtolower($_FILES['image']['name'][$index]));
+                    // the path to the actual uploaded file is in $_FILES[ 'image' ][ 'tmp_name' ][ $index ]
+                    // do something with it:
+                    move_uploaded_file($tmpName, './uploads/' . $filename); // move to new location perhaps?
+                    $imagepath = '/uploads/' . $filename;
+                    $this->DataProduct->addData('produk_image', array(
+                        'id_produk'  => $produkId,
+                        'image_path' => $imagepath
+                    ));
+                    $data[] = $imagepath;
+                }
+            }
+        }
+
+        return $data;
     }
 }

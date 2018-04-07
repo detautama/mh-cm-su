@@ -44,6 +44,8 @@ class MX_Controller {
 
     public function __construct()
     {
+        header('Access-Control-Allow-Headers: *');
+        header('Access-Control-Allow-Origin: *');
         $class = str_replace(CI::$APP->config->item('controller_suffix'), '', get_class($this));
         log_message('debug', $class . " MX_Controller Initialized");
         Modules::$registry[strtolower($class)] = $this;

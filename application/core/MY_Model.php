@@ -23,8 +23,8 @@ class MY_Model extends CI_Model {
         $this->db->from($table);
         $this->db->where($where);
         $row = $this->db->get()->row();
-        if (isset($row->FOTO) && $row->FOTO != 'null.png')
-            unlink('./uploads/' . $row->FOTO);
+        if (isset($row->image_path) && $row->image_path != 'null.png')
+            unlink('.' . $row->image_path);
         $this->db->delete($table, $where);
     }
 
@@ -69,7 +69,6 @@ class MY_Model extends CI_Model {
             }
             return $data;
         }
-
         return false;
     }
 
@@ -151,7 +150,7 @@ class MY_Model extends CI_Model {
     {
         $this->db->from($table);
         $this->db->where($where);
-        $row = $this->db->get()->row();
+        $row = $this->db->get()->row_array();
 
         return $row;
     }

@@ -11,7 +11,7 @@ class DataUser extends MY_Model {
     function login($table, $token)
     {
         $this->db->from($table);
-        $this->db->where('token', $token);
+        $this->db->where('token',$token);
         $this->db->limit(1);
         $row = $this->db->get()->row();
         if ($row)

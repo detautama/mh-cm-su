@@ -13,11 +13,19 @@ class logs extends MX_Controller {
         header('Access-Control-Allow-Headers: *');
         header('Access-Control-Allow-Origin: *');
         parent::__construct();
-        $this->load->model('logs/DataRecord');
+        $this->load->model('DataRecord');
+        $this->load->model('DataProduct');
     }
 
     public function index(){
         $data = $this->DataRecord->getRecord();
         echo json_encode($data);
+    }
+
+    public function clear($id)
+    {
+        $this->DataProduct->updateData('records',array(
+            'status'=>1
+        ),array('id_log'=>$id));
     }
 }

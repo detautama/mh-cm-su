@@ -7,7 +7,7 @@ class Main extends MX_Controller {
         header('Access-Control-Allow-Headers: *');
         header('Access-Control-Allow-Origin: *');
         parent::__construct();
-        $this->load->model('main/DataUser');
+        $this->load->model('DataUser');
         $this->form_validation->CI =& $this;
     }
 

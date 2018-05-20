@@ -102,6 +102,7 @@ class Product extends MX_Controller {
         $token = $this->getToken();
         if ($token)
         {
+            $this->DataProduct->deleteImageData('produk_image',array('id_produk'=>$produkId));
             $this->DataProduct->deleteData('produk', array(
                 'user_token' => $token,
                 'id_produk'  => $produkId
@@ -180,7 +181,6 @@ class Product extends MX_Controller {
                 }
             }
         }
-
         return $data;
     }
 }

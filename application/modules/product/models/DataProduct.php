@@ -15,7 +15,7 @@ class DataProduct extends MY_Model {
         return $this->getSpecificData($table, array($colname => $this->db->insert_id()));
     }
 
-    public function updateAndGetData($table,$data,$where,$id_produk)
+    public function updateAndGetData($table, $data, $where, $id_produk)
     {
         $this->db->set($data);
         $this->db->where($where);
@@ -40,8 +40,10 @@ class DataProduct extends MY_Model {
                 ));
                 $data[] = $row;
             }
+
             return $data;
         }
+
         return $data;
     }
 
@@ -58,7 +60,25 @@ class DataProduct extends MY_Model {
             {
                 $data[] = $row;
             }
+
             return $data;
-        } else return null;
+        } else return $data;
+    }
+
+    function deleteImageData($table, $where)
+    {
+        $this->db->select('image_path');
+        $this->db->from($table);
+        $this->db->where($where);
+        $query = $this->db->get();
+        if ($query->num_rows() >= 0)
+        {
+            foreach ($query->result() as $row)
+            {
+                if (isset($row->image_path))
+                    unlink('.' . $row->image_path);
+            }
+        }
+        $this->db->delete($table, $where);
     }
 }

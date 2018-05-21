@@ -24,11 +24,12 @@ class DataProduct extends MY_Model {
         return $this->getSpecificData($table, array('id_produk' => $id_produk));
     }
 
-    function getRelation2D($limit, $start, $table)
+    function getRelation2D($limit, $start, $table,$where)
     {
         $data = null;
         if (isset($limit) && isset($start))
             $this->db->limit($limit, $start);
+        $this->db->where($where);
 
         $query = $this->db->get($table);
         if ($query->num_rows() >= 0)

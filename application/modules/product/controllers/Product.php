@@ -132,7 +132,9 @@ class Product extends MX_Controller {
     public function lists()
     {
         $token = $this->getToken();
-        $arr = $this->DataProduct->getRelation2D(null, null, 'produk');
+        $arr = $this->DataProduct->getRelation2D(null, null, 'produk', array(
+            'user_token'=>$token
+        ));
         //add the header here
         header('Access-Control-Allow-Headers: *');
         header('Access-Control-Allow-Origin: *');

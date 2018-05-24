@@ -12,7 +12,6 @@ class DataUser extends MY_Model {
     {
         $this->db->from($table);
         $this->db->where('token', $token);
-        $this->db->limit(1);
         $row = $this->db->get()->row();
         if ($row)
         {

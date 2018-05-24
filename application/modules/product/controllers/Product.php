@@ -42,9 +42,9 @@ class Product extends MX_Controller {
                 $data = $this->DataProduct->addAndGet('produk', $data, 'id_produk');
                 $this->upload($data['id_produk']);
                 $this->DataRecord->addData('records', array(
-                    'token'=>$token,
-                    'id_produk'=>$data['id_produk'],
-                    'activity'=>"menambah"
+                    'token'     => $token,
+                    'id_produk' => $data['id_produk'],
+                    'activity'  => "menambah"
                 ));
                 $data['image_url'] = $this->DataProduct->searchData(null, null, 'produk_image', null, null, array(
                     'id_produk' => $data['id_produk']
@@ -84,9 +84,9 @@ class Product extends MX_Controller {
                     'id_produk' => $data['id_produk']
                 ));
                 $this->DataRecord->addData('records', array(
-                    'token'=>$token,
-                    'id_produk'=>$data['id_produk'],
-                    'activity'=>"mengubah"
+                    'token'     => $token,
+                    'id_produk' => $data['id_produk'],
+                    'activity'  => "mengubah"
                 ));
                 echo json_encode($data);
             } else
@@ -102,15 +102,15 @@ class Product extends MX_Controller {
         $token = $this->getToken();
         if ($token)
         {
-            $this->DataProduct->deleteImageData('produk_image',array('id_produk'=>$produkId));
+            $this->DataProduct->deleteImageData('produk_image', array('id_produk' => $produkId));
             $this->DataProduct->deleteData('produk', array(
                 'user_token' => $token,
                 'id_produk'  => $produkId
             ));
             $this->DataRecord->addData('records', array(
-                'token'=>$token,
-                'id_produk'=>$produkId,
-                'activity'=>"mengubah"
+                'token'     => $token,
+                'id_produk' => $produkId,
+                'activity'  => "mengubah"
             ));
             echo json_encode(array("message" => "produk deleted"));
         } else
@@ -133,7 +133,7 @@ class Product extends MX_Controller {
     {
         $token = $this->getToken();
         $arr = $this->DataProduct->getRelation2D(null, null, 'produk', array(
-            'user_token'=>$token
+            'user_token' => $token
         ));
         //add the header here
         header('Access-Control-Allow-Headers: *');
@@ -146,6 +146,30 @@ class Product extends MX_Controller {
         }
     }
 
+    public function search()
+    {
+        if ($this->isPost())
+        {
+            $token = $this->getToken();
+            $keyword = $this->input->post('keyword');
+            $where = "user_token='" . $token . "' AND nama_produk LIKE '%" . $keyword . "%'";
+
+            $arr = $this->DataProduct->getRelation2D(null, null, 'produk', $where);
+            //add the header here
+            header('Access-Control-Allow-Headers: *');
+            header('Access-Control-Allow-Origin: *');
+            if ($arr)
+                echo json_encode($arr);
+            else
+            {
+                echo json_encode(array());
+            }
+        } else
+        {
+            echo json_encode(array());
+        }
+    }
+
     public function getToken()
     {
         $headers = apache_request_headers();
@@ -153,12 +177,6 @@ class Product extends MX_Controller {
         {
             return str_replace("Basic ", "", $headers['Authorization']);
         }
-    }
-
-    public function mybase64()
-    {
-        $base_64 = base64_encode('adminadmin');
-        echo json_encode($base_64);
     }
 
     public function upload($produkId)
@@ -183,6 +201,7 @@ class Product extends MX_Controller {
                 }
             }
         }
+
         return $data;
     }
 }
